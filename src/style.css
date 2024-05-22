@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #242424;
+  color: #f0f0f0;
+}
+
+.list-item {
+  @apply p-2 bg-slate-600 text-center w-fit rounded-sm hover:bg-slate-800 cursor-pointer;
+}
+
+.list-item.completed {
+  @apply bg-green-500 hover:bg-green-700;
+}
