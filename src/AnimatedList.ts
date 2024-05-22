@@ -59,7 +59,17 @@ export class AnimatedList {
                 }
                 this.#element.appendChild(existing)
             } else {
-                this.#element.appendChild(item.createElement());
+                let ele = item.createElement();
+                ele.onclick = (e) => {
+                    e.preventDefault();
+                    if (e.shiftKey) {
+                        this.removeByHash(ele.id);
+                    } else {
+                        this.toggleCompleted(this.#list.findIndex(i => i.hash === ele.id));
+                    }
+                    
+                }
+                this.#element.appendChild(ele);
             }
         }
         

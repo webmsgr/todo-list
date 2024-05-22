@@ -8,8 +8,13 @@
   </head>
   <body>
     <div id="app" class="text-center">
-      <h1 class="text-3xl font-bold">Todo List</h1>
-      <ol id="list" class="flex flex-col gap-2 text-center  items-center">
+      <h1 class="text-3xl font-bold my-2">Todo List</h1>
+      <p> Click item to toggle complete. Shift click to remove item </p>
+      <div class="flex flex-row gap-2 items-center justify-center">
+        <input id="addItem" type="text" class="w-1/2 p-2 my-2 bg-slate-900 rounded-sm" placeholder="Add a new todo" />
+        <button id="addButton" class="bg-blue-500 text-white p-2 my-2 w-fit rounded-sm hover:bg-blue-700 transition-colors">Add</button>
+      </div>
+      <ol id="list" class="flex flex-col gap-2 text-center items-center">
 
       </ol>
     </div>

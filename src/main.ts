@@ -11,6 +11,30 @@ document.addEventListener("DOMContentLoaded", () => {
   list.add("test 3");
   list.add("test completed");
   list.setCompleted(3, true);
-})
+  const inputBox: HTMLInputElement = document.querySelector("#addItem")!!;
+  document.querySelector("#addButton")!!.addEventListener("click", () => {
+    if (inputBox.value.trim() === "") return;
+    list.add(inputBox.value);
+    inputBox.value = "";
+  });
+  inputBox.onkeydown = (e) => {
+    if (inputBox.value.trim() === "") return;
+    if (e.key === "Enter") {
+      list.add(inputBox.value);
+      inputBox.value = "";
+    };
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Shift") {
+      document.body.classList.add("shift");
+    }
+  });
+  document.addEventListener("keyup", (e) => {
+    if (e.key === "Shift") {
+      document.body.classList.remove("shift");
+    }
+  });
+});
 
 

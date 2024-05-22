@@ -8,9 +8,13 @@ body {
 }
 
 .list-item {
-  @apply p-2 bg-slate-600 text-center w-fit rounded-sm hover:bg-slate-800 cursor-pointer;
+  @apply p-2 bg-slate-600 text-center w-fit rounded-sm hover:bg-slate-800 cursor-pointer transition-colors;
 }
 
 .list-item.completed {
   @apply bg-green-500 hover:bg-green-700;
+}
+
+.shift .list-item {
+  @apply hover:!bg-red-600;
 }
