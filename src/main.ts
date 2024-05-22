@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
       inputBox.value = "";
     };
   }
-  
   document.addEventListener("keydown", (e) => {
     if (e.key === "Shift") {
       document.body.classList.add("shift");
