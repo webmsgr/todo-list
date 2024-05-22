@@ -1,44 +1,61 @@
-import autoAnimate from "@formkit/auto-animate";
-// simple animated list, powered by auto-animate
+import autoAnimate, { AnimationController } from "@formkit/auto-animate";
+/** simple animated list, powered by auto-animate */
 export class AnimatedList {
     #list: ListItem[];
     #element: HTMLElement;
+    #controller: AnimationController<unknown>
+    /** Create a new animated list, binding it to an element */
     constructor(element: HTMLElement) {
         this.#list = [];
         this.#element = element;
-        autoAnimate(this.#element);
+        this.#controller = autoAnimate(this.#element);
     }
+    /** Add a new item to the list */
     add(item: string) {
         this.#list.push(new ListItem(item));
         this.#rebuild();
     }
+    /** Remove an item from the list */
     remove(index: number) {
         this.#list.splice(index, 1);
         this.#rebuild();
     }
+    /** Set the value of an item in the list */
     set(index: number, item: string) {
         this.#list[index].item = item;
         this.#rebuild();
     }
+    /** Move an item from one slot to another */
     move(from: number, to: number) {
         const [item] = this.#list.splice(from, 1);
         this.#list.splice(to, 0, item);
         this.#rebuild();
     }
+    /** Set the completed status of an item */
     setCompleted(index: number, completed: boolean) {
         this.#list[index].completed = completed;
         this.#rebuild();
     }
+    /** Toggle the completed status of an item */
     toggleCompleted(index: number) {
         this.#list[index].completed = !this.#list[index].completed;
         this.#rebuild();
     }
+    /** Remove an item by its hash */
     removeByHash(hash: string) {
         const index = this.#list.findIndex(item => item.hash === hash);
         if (index !== -1) {
             this.#list.splice(index, 1);
             this.#rebuild();
         }
+    }
+    /** Disable the animation */
+    disable() {
+        this.#controller.disable();
+    }
+    /** Enable the animation */
+    enable() {
+        this.#controller.enable();
     }
     #rebuild() {
         // removed
