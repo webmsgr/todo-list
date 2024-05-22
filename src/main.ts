@@ -6,11 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const list = new AnimatedList(listElement);
   // @ts-ignore put the list on the global scope
   window.list = list;
-  list.add("test 1");
+  /*list.add("test 1");
   list.add("test 2");
   list.add("test 3");
   list.add("test completed");
-  list.setCompleted(3, true);
+  list.setCompleted(3, true);*/
   const inputBox: HTMLInputElement = document.querySelector("#addItem")!!;
   document.querySelector("#addButton")!!.addEventListener("click", () => {
     if (inputBox.value.trim() === "") return;
