@@ -1,14 +1,22 @@
 import autoAnimate, { AnimationController } from "@formkit/auto-animate";
-/** simple animated list, powered by auto-animate */
+/** simple animated list, powered by auto-animate, now with persist */
 export class AnimatedList {
     #list: ListItem[];
     #element: HTMLElement;
     #controller: AnimationController<unknown>
+    #localStorageKey: string
     /** Create a new animated list, binding it to an element */
     constructor(element: HTMLElement) {
-        this.#list = [];
+        this.#list = JSON.parse(localStorage.getItem("animated-list") || "[]")
+            .map((item: { item: string, hash: string, completed: boolean }) => {
+                const listItem = new ListItem(item.item);
+                listItem.completed = item.completed;
+                return listItem;
+            });
         this.#element = element;
         this.#controller = autoAnimate(this.#element);
+        this.#localStorageKey = "animated-list";
+        this.#rebuild();
     }
     /** Add a new item to the list */
     add(item: string) {
@@ -58,6 +66,8 @@ export class AnimatedList {
         this.#controller.enable();
     }
     #rebuild() {
+        // save
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.#list.map(item => ({ item: item.item, completed: item.completed }))));
         // removed
         for (const child of Array.from(this.#element.children)) {
             if (!this.#list.find(item => item.hash === child.id)) {
